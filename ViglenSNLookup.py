@@ -1,6 +1,10 @@
-import os, subprocess, urlparse, webbrowser
+import os, subprocess, urlparse, webbrowser, requests, bs4
 
-wmicOutput = subprocess.check_output(['wmic', 'baseboard', 'get', 'serialnumber']) #Get serial number from WMIC
-serialNumber = wmicOutput[17:] #Slice string to just SN
-viglenLookup = 'http://www.viglen.co.uk/Viglen/Support/Configuration/?sn=' + serialNumber #Build lookup URL
-webbrowser.open(viglenLookup) #Open lookup URL
+wmicOutput = subprocess.check_output(['wmic', 'baseboard', 'get', 'serialnumber'])
+serialNumber = wmicOutput[17:24]
+viglenLookup = 'http://www.viglen.co.uk/Viglen/Support/Configuration/?sn=' + serialNumber
+viglenInfo = requests.get(viglenLookup)
+viglenSoup = bs4.BeautifulSoup(viglenInfo.text, "html.parser")
+elems = viglenSoup.select('#lblServiceExpire')
+print(elems[0].getText())
+raw_input("Press Enter to continue...")
