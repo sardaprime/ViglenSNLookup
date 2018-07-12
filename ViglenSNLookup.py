@@ -6,7 +6,7 @@ viglenLookup = 'http://www.viglen.co.uk/Viglen/Support/Configuration/?sn=' + ser
 viglenInfo = requests.get(viglenLookup)
 viglenSoup = bs4.BeautifulSoup(viglenInfo.text, "html.parser")
 elems = viglenSoup.select('#lblServiceExpire')
-print(subprocess.check_output(['hostname']))
+print('Hostname: ' + subprocess.check_output(['hostname']))
 print('Serial Number: ' + serialNumber)
 print('Warranty Expires: ' + elems[0].getText())
 raw_input("Press Enter to exit...")
