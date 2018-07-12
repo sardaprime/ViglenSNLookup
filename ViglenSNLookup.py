@@ -1,4 +1,4 @@
-import os, subprocess, urlparse, webbrowser, bs4
+import os, subprocess, urlparse, webbrowser
 
 wmicOutput = subprocess.check_output(['wmic', 'baseboard', 'get', 'serialnumber']) #Get serial number from WMIC
 serialNumber = wmicOutput[17:] #Slice string to just SN
