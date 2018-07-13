@@ -1,5 +1,12 @@
 import os, subprocess, urlparse, webbrowser, requests, bs4
 
+wmicOutput = ""
+serialNumber = ""
+viglenLookup = ""
+viglenInfo = ""
+viglenSoup = ""
+elems = ""
+
 wmicOutput = subprocess.check_output(['wmic', 'baseboard', 'get', 'serialnumber'])
 serialNumber = wmicOutput[17:24]
 viglenLookup = 'http://www.viglen.co.uk/Viglen/Support/Configuration/?sn=' + serialNumber
